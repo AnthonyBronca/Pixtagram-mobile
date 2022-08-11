@@ -16,6 +16,10 @@ export const posts = [
                 user: 'gary',
                 comment: 'meow'
             },
+            {
+                user: 'testerMan',
+                comment: 'Love nessie!!!'
+            },
         ],
     },
     {

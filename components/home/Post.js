@@ -34,6 +34,10 @@ const Post = ({ post }) => {
             <PostImage post={post} />
             <View style={{ marginHorizontal: 15, marginTop: 10 }}>
                 <PostFooter />
+                <Likes post={post} />
+                <Caption post={post} />
+                <CommentsSection post={post} />
+                <Comments post={post} />
             </View>
         </View>
     );
@@ -96,6 +100,62 @@ const Save = ({ imgStyle }) => (
     <TouchableOpacity>
         <Image style={imgStyle} source={require('../../assets/save.png')} />
     </TouchableOpacity>
+)
+
+
+const Likes = ({ post }) => (
+    <View style={{ flexDirection: 'row', marginTop: 4 }}>
+        <Text style={{ color: 'white', fontWeight: '600' }}>{post.likes.toLocaleString('en')} likes</Text>
+    </View>
+)
+
+const Caption = ({ post }) => (
+    <View style={{ flexDirection: 'row', marginTop: 5 }}>
+        <Text style={{ color: 'white', fontWeight: '600', marginRight: 5 }}>{post.user}</Text>
+        <Text style={{ color: 'white' }}>{post.caption}</Text>
+    </View>
+)
+
+const CommentsSection = ({ post }) => (
+    <View style={{ marginTop: 5 }}>
+        {!!post.comments.length && (
+            <Text style={{ color: 'gray' }}>
+                View{post.comments.length > 1 ? ' all ' : ' '}{post.comments.length} {post.comments.length > 1 ? 'comments' : 'comment'}
+            </Text>
+        )}
+    </View>
+
+)
+
+// Cases for comments:
+
+/*
+There can be zero comments -> For this case we will use a double negation due to 0 returning 'false'
+There can be 1 comment
+There can be many comments
+
+*/
+
+const Comments = ({ post }) => (
+
+    <View>
+        <View style={{ color: 'white' }}>
+            {post.comments.length > 2 ?
+                <Text style={{ fontWeight: '600', color: 'white' }}>
+                    {post.comments[post.comments.length - 1].user}
+                    <Text style={{ fontWeight: 'none', color: 'white' }}> {post.comments[post.comments.length - 1].comment}</Text>
+                </Text>
+                : <View>
+                    {post.comments.map((com, idx) => (
+                        <View key={idx} style={{ flexDirection: 'row' }}>
+                            <Text style={{ color: 'white', fontWeight: '600' }}>{com.user} </Text>
+                            <Text style={{ color: 'white' }}>{com.comment}</Text>
+                        </View>
+                    ))}
+                </View>
+            }
+        </View>
+    </View>
 )
 
 const styles = StyleSheet.create({
