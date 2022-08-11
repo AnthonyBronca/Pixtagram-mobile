@@ -7,10 +7,13 @@ import { Divider } from 'react-native-elements';
 import { posts } from '../data/posts';
 import BottomTabs, { bottomTabIcons } from '../components/home/BottomTabs';
 
-const HomeScreen = () => {
+
+
+
+const HomeScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <Header />
+            <Header navigation={navigation} />
             <ScrollView>
                 <Stories />
                 {posts.map((post, index) => (

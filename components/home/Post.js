@@ -144,7 +144,7 @@ const Comments = ({ post }) => (
             {post.comments.length > 2 ?
                 <Text style={{ fontWeight: '600', color: 'white' }}>
                     {post.comments[post.comments.length - 1].user}
-                    <Text style={{ fontWeight: 'none', color: 'white' }}> {post.comments[post.comments.length - 1].comment}</Text>
+                    <Text style={{ fontWeight: 'normal', color: 'white' }}> {post.comments[post.comments.length - 1].comment}</Text>
                 </Text>
                 : <View>
                     {post.comments.map((com, idx) => (
