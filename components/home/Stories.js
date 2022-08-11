@@ -9,9 +9,9 @@ const Stories = () => {
         <View style={{ marginBottom: 13 }}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {users.map((story, index) => (
-                    <View key={index} style={{ alignItems: 'center' }}>
+                    <View key={index} style={{ alignItems: 'center', margin: 3 }}>
                         <Image source={{ uri: story.image }} style={styles.story} />
-                        <Text style={{ color: 'white' }}>{
+                        <Text style={{ color: 'white', marginLeft: 4 }}>{
                             story.user.length > 11 ? story.user.slice(0, 10).toLowerCase() + '...' : story.user.toLowerCase()}
                         </Text>
                     </View>

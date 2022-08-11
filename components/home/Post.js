@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Divider } from 'react-native-elements';
 import heart from '../../assets/heart.png'
-
+import Stories from './Stories';
 
 const postFooterIcons = [
     {
@@ -29,7 +29,8 @@ const postFooterIcons = [
 const Post = ({ post }) => {
     return (
         <View style={{ marginBottom: 30 }}>
-            <Divider width={1} orientation='vertical' />
+            {/* <Stories /> */}
+            {/* <Divider width={1} orientation='vertical' /> */}
             <PostHeader post={post} />
             <PostImage post={post} />
             <View style={{ marginHorizontal: 15, marginTop: 10 }}>
@@ -65,7 +66,7 @@ const PostImage = ({ post }) => (
 )
 
 const PostFooter = () => (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
         <View style={styles.leftFootContainer}>
             <Heart imgStyle={[styles.footerIcon, styles.shareIcon]} />
             <Comment imgStyle={[styles.footerIcon, styles.shareIcon]} />
