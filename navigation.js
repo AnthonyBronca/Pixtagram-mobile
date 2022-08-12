@@ -4,6 +4,8 @@ import { View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import NewPostScreen from './screens/NewPostScreen';
+import LoginScreen from './screens/LoginScreen';
+import SignUpScreen from './screens/SignUpScreen';
 
 
 /*
@@ -27,7 +29,7 @@ const screenOptions = {
     headerShown: false,
 }
 
-const SignedInStack = () => (
+export const SignedInStack = () => (
     <NavigationContainer>
         <Stack.Navigator
             initialRouteName='HomeScreen'
@@ -40,4 +42,14 @@ const SignedInStack = () => (
 
 )
 
-export default SignedInStack;
+export const SignedOutStack = () => (
+    <NavigationContainer>
+        <Stack.Navigator
+            initialRouteName='LoginScreen'
+            screenOptions={screenOptions}
+        >
+            <Stack.Screen name='LoginScreen' component={LoginScreen} />
+            <Stack.Screen name='SignUpScreen' component={SignUpScreen} />
+        </Stack.Navigator>
+    </NavigationContainer>
+)
