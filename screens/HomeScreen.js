@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import Header from '../components/home/Header';
 import Post from '../components/home/Post';
@@ -6,11 +6,16 @@ import Stories from '../components/home/Stories';
 import { Divider } from 'react-native-elements';
 import { posts } from '../data/posts';
 import BottomTabs, { bottomTabIcons } from '../components/home/BottomTabs';
-
+import { firebase, db } from '../firebase'
 
 
 
 const HomeScreen = ({ navigation }) => {
+
+    useEffect(() => {
+        db.collectionGroup('posts').onSnapshot(snapshot => {
+        })
+    }, [])
     return (
         <SafeAreaView style={styles.container}>
             <Header navigation={navigation} />
