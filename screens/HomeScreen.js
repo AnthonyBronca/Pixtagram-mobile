@@ -14,6 +14,7 @@ const HomeScreen = ({ navigation }) => {
 
     useEffect(() => {
         db.collectionGroup('posts').onSnapshot(snapshot => {
+            console.log(snapshot.docs.map(doc => doc.data()))
         })
     }, [])
     return (

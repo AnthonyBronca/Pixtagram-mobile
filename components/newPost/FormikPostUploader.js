@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Image, Button } from 'react-native';
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import { Divider, Input } from 'react-native-elements';
 import validUrl from 'valid-url'
 import * as ImagePicker from 'expo-image-picker';
+import { firebase, db } from '../../firebase'
 /*
 Npm install Formik
 Npm install Yup
@@ -23,6 +24,44 @@ const FormikPostUploader = ({ navigation }) => {
 
     const [thumbnailUrl, setThumbnailUrl] = useState();
     const [image, setImage] = useState(null);
+    const [currentLoggedInUser, setCurrentLoggedInUser] = useState();
+
+    const getUsername = () => {
+        const user = firebase.auth().currentUser;
+        const unsubscribe = db.collection('users').where('owner_uid', '==', user.uid).limit(1).onSnapshot(
+            snapshot => snapshot.docs.map(doc => {
+                setCurrentLoggedInUser({
+                    username: doc.data().username,
+                    profilePicture: doc.data().profile_picture,
+
+                })
+            })
+        )
+        return unsubscribe;
+    }
+
+    useEffect(() => {
+        getUsername()
+    }, []);
+
+    const uploadPostToFirebase = (imageUrl, caption) => {
+        const unsubscribe = db.collection('users').doc(firebase.auth().currentUser.email).collection('posts')
+            .add({
+                imageUrl: imageUrl,
+                user: currentLoggedInUser.username,
+                profile_picture: currentLoggedInUser.profilePicture,
+                owner_uid: firebase.auth().currentUser.uid,
+                caption: caption,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                likes: 0,
+                likes_by_users: [],
+                comments: [],
+            })
+            .then(() => navigation.goBack())
+        return unsubscribe
+
+    }
+
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -40,9 +79,8 @@ const FormikPostUploader = ({ navigation }) => {
         }
     };
 
-    const handleSubmit = () => {
-        // console.log(values)
-        console.log('your post was submitted')
+    const handleSubmit = (values, imageUrl) => {
+        uploadPostToFirebase(values, imageUrl, values.caption)
         navigation.goBack()
     }
 
@@ -52,6 +90,7 @@ const FormikPostUploader = ({ navigation }) => {
             onSubmit={(values) => {
                 console.log(values)
                 console.log('your post was submitted')
+                handleSubmit(values, imageUrl)
                 navigation.goBack()
 
             }}
