@@ -1,3 +1,9 @@
+
+# backend
+.env
+build
+.DS_Store
+
 # OSX
 #
 .DS_Store
