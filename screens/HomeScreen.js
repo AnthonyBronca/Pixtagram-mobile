@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
 
     useEffect(() => {
         db.collectionGroup('posts').onSnapshot(snapshot => {
-            console.log(snapshot.docs.map(doc => doc.data()))
+            // console.log(snapshot.docs.map(doc => doc.data()))
         })
     }, [])
     return (
@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
                     <Post post={post} key={index} />
                 ))}
             </ScrollView>
-            <BottomTabs icons={bottomTabIcons} />
+            <BottomTabs icons={bottomTabIcons} navigation={navigation} />
         </SafeAreaView>
     );
 }

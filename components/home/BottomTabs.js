@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useState } from 'react';
 import { Divider } from 'react-native-elements';
+
+
 export const bottomTabIcons = [
     {
         name: 'Home',
@@ -27,10 +29,26 @@ export const bottomTabIcons = [
 
 
 
-const BottomTabs = ({ icons }) => {
+const BottomTabs = ({ icons, navigation }) => {
+
     const [activeTab, setActiveTab] = useState('Home')
+
+    const setBottomTab = (iconName, navigation) => {
+        setActiveTab(iconName);
+        if (iconName === 'Profile') {
+            navigation.push('ProfileScreen');
+            setActiveTab('Profile')
+        }
+        if (iconName === 'Home') {
+            navigation.popToTop();
+        }
+    }
+
+
+
+
     const Icon = ({ icon }) => (
-        <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
+        <TouchableOpacity onPress={() => setBottomTab(icon.name, navigation)}>
             <Image source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }}
                 style={[
                     styles.icon,
