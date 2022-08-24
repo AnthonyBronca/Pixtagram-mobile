@@ -30,16 +30,22 @@ export const bottomTabIcons = [
 
 
 const BottomTabs = ({ icons, navigation }) => {
-
-    const [activeTab, setActiveTab] = useState('Home')
+    let pointer = 'Home'
+    const [activeTab, setActiveTab] = useState(pointer)
 
     const setBottomTab = (iconName, navigation) => {
-        setActiveTab(iconName);
+        // setActiveTab(iconName);
         if (iconName === 'Profile') {
+            console.log('que es', iconName)
+            console.log(activeTab, 'whats active')
+            pointer = 'Profile'
+            // setActiveTab('Profile')
+            console.log(activeTab, "this is active tab")
             navigation.push('ProfileScreen');
-            setActiveTab('Profile')
         }
         if (iconName === 'Home') {
+            console.log('what is icone', iconName)
+            setActiveTab(iconName)
             navigation.popToTop();
         }
     }

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     website: {
         color: '#89CFF0',
-        fontSize: '12'
+        fontSize: 14
     }
 })
 

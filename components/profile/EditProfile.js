@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     button: {
-        backgroundColor: 'rgb(15,15,15)',
+        backgroundColor: 'rgb(25,25,25)',
         height: 30,
         width: '86%',
         justifyContent: 'center',
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     tinyButton: {
-        backgroundColor: 'rgb(15,15,15)',
+        backgroundColor: 'rgb(25,25,25)',
         marginLeft: 8,
         width: 32,
         justifyContent: 'center',
