@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Formik } from 'formik';
@@ -7,10 +7,13 @@ import Validator from 'email-validator'
 import { Form, FormItem } from 'react-native-form-component'
 import { firebase } from '../../firebase'
 
+
 //npm install email-validator
 
-
 const LoginForm = ({ navigation }) => {
+
+
+
 
     const LoginFormSchema = Yup.object().shape({
         email: Yup.string().email().required('An email is required'),
@@ -18,6 +21,7 @@ const LoginForm = ({ navigation }) => {
     })
 
     const onLogin = async (email, password) => {
+
 
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)

@@ -12,9 +12,9 @@ import adminsReducer from './admins'
 const rootReducer = combineReducers({
     session,
     userReducer,
-    posts,
-    searchReducer,
-    comments,
+    // posts,
+    // searchReducer,
+    // comments,
     adminsReducer,
 });
 
